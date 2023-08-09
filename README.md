@@ -6,4 +6,4 @@
 * Информация о имени, фамилии, возрасте, городе, стране, поле пользователя, лайкнувшего запись вносится в таблицу базы данных SQLite
 * На основании полученных данных строятся 4 диаграммы, показывающие процентное соотношения. Графики можно увидеть ниже
 
-<img src='https://sun9-84.userapi.com/impg/Y1jE520IsDpL0pQTMn_pybahgv88RAFLfrN-BA/grSKN3T-q1M.jpg?size=2224x2160&quality=96&sign=8bf3ce3c466d6925a1ddc017b7f1da46&type=album'>
+<img src='https://sun9-60.userapi.com/impg/xxFJXwHp1LjAf_uawcK6vQ463rInrZHfTnQC0w/JnU7cqu7twI.jpg?size=1654x1644&quality=96&sign=c7f2d7f314d7476d8148eac1cb27c0a2&type=album'>
