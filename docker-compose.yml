@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   postgres:
-    container_name: NIRSpostgres
+    container_name: VKpostgres
     image: postgres:15-alpine3.18
     environment:
       - POSTGRES_USER={DB_USER}
@@ -19,7 +19,7 @@ services:
       - .env
 
   pgadmin:
-    container_name: NIRSpgadmin
+    container_name: VKpgadmin
     image: dpage/pgadmin4:latest
     environment:
       - PGADMIN_DEFAULT_EMAIL={PGADMIN_EMAIL}
