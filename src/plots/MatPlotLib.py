@@ -9,6 +9,9 @@ def create_plot(title: str, values: list[int], labels: list[str | int | float], 
         'fontweight': font_weight
     }
     plt.title(title, y=1.5, fontdict=font_dict)
+
+    ax = plt.subplots(figsize=(10, 15), layout='constrained')[1]
+    ax.bar(labels, values)
     plt.axis('equal')
     plt.pie(values, labels=labels, radius=2, autopct='%0.1f%%')
     plt.savefig(filepath, bbox_inches='tight', pad_inches=1)
