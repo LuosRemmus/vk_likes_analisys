@@ -1,7 +1,5 @@
 pydantic==1.10.5
 python-dotenv==1.0.0
-SQLAlchemy==2.0.4
-alembic==1.11.1
 matplotlib~=3.7.2
 requests~=2.31.0
-psycopg2-binary
+fastapi[all]

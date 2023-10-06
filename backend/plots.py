@@ -1,9 +1,15 @@
 from matplotlib import pyplot as plt
-from datetime import datetime
+from backend.config import MEDIA_FILEPATH
 
 
-def create_plot(title: str, values: list[int], labels: list[str | int | float], filepath: str, font_size: int = 36,
-                font_weight: int = 8):
+def create_plot(
+        title: str, 
+        values: list[int], 
+        labels: list[str | int | float], 
+        filepath: str = MEDIA_FILEPATH, 
+        font_size: int = 36,
+        font_weight: int = 8):
+    
     font_dict = {
         'fontsize': font_size,
         'fontweight': font_weight
@@ -15,5 +21,4 @@ def create_plot(title: str, values: list[int], labels: list[str | int | float], 
     plt.axis('equal')
     plt.pie(values, labels=labels, radius=2, autopct='%0.1f%%')
     plt.savefig(filepath, bbox_inches='tight', pad_inches=1)
-    print(f'{datetime.utcnow()} [INFO] Plot successfully saved!')
     plt.clf()
