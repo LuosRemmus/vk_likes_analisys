@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+    <form method="GET" action="http://127.0.0.1:8000/analyze_likes">
+        <div>
+            <p>Ссылка на пост</p>
+            <input type="text", name="post_url", placeholder="Введите ссылку:" required>
+        </div>
+
+        <div style="border: 1px solid black; width: 250px;">
+            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+                <p>Пол</p>
+                <input type="checkbox", name="sex_checkbox">
+            </div>
+            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+                <p>Город</p>
+                <input type="checkbox", name="city_checkbox">
+            </div>
+            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+                <p>Возраст</p>
+                <input type="checkbox", name="age_checkbox">
+            </div>
+            <div style="margin-right: 20px; margin-bottom: 10px;">
+                <p>Страна</p>
+                <input type="checkbox", name="country_checkbox">
+            </div>
+        </div>
+        <button style="margin-top: 20px;">Submit</button>
+    </form>
+{% endblock %}

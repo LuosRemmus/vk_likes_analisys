@@ -4,21 +4,22 @@ from backend.config import MEDIA_FILEPATH
 
 def create_plot(
         title: str, 
-        values: list[int], 
-        labels: list[str | int | float], 
-        filepath: str = MEDIA_FILEPATH, 
-        font_size: int = 36,
-        font_weight: int = 8):
-    
-    font_dict = {
-        'fontsize': font_size,
-        'fontweight': font_weight
-    }
-    plt.title(title, y=1.5, fontdict=font_dict)
+        values: dict.values, 
+        labels: dict.keys, 
+        filepath: str = MEDIA_FILEPATH):
 
-    ax = plt.subplots(figsize=(10, 15), layout='constrained')[1]
+    font_dict_lables = {
+        'family': 'sans-serif',
+        'color': 'blue',
+        'weight': 'bold',
+        'size': 24,
+    }
+
+    fig, ax = plt.subplots(figsize=(10, 15))
     ax.bar(labels, values)
-    plt.axis('equal')
-    plt.pie(values, labels=labels, radius=2, autopct='%0.1f%%')
-    plt.savefig(filepath, bbox_inches='tight', pad_inches=1)
-    plt.clf()
+    plt.xticks(rotation='vertical')
+    ax.set_xlabel(title, fontdict=font_dict_lables)
+    ax.set_ylabel("values", fontdict=font_dict_lables)
+    ax.set_title(title)
+    plt.savefig(f"{filepath}/{title}.png")
+    plt.close()

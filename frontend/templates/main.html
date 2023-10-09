@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+    <img src="{{ url_for('media', path='ages.png') }}" alt="Возраст отреагировавших" style="float: left; width: 25%;">
+    <img src="{{ url_for('media', path='sex.png') }}" alt="Пол отреагировавших" style="float: left; width: 25%;">
+    <img src="{{ url_for('media', path='cities.png') }}" alt="Город отреагировавших" style="float: left; width: 25%;">
+    <img src="{{ url_for('media', path='countries.png') }}" alt="Страна отреагировавших" style="float: left; width: 25%;">
+{% endblock %}

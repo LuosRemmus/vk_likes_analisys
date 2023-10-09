@@ -1,10 +1,8 @@
 import re
-import json
-import time
 from requests import get
 from datetime import datetime
 
-from config import ACCESS_TOKEN
+from backend.config import ACCESS_TOKEN
 
 
 def get_user_ids_from_post(group_id: int, post_id: int, offset: int = 0, count: int = 1000) -> list[int]:
@@ -24,59 +22,49 @@ def get_user_ids_from_post(group_id: int, post_id: int, offset: int = 0, count: 
     if len(user_ids) == 1000:
         user_ids += get_user_ids_from_post(group_id, post_id, offset=offset+1000)
 
-    return list(map(str, user_ids))
+    result = list(map(lambda x: "id"+x, map(str, user_ids)))
+
+    return result
 
 
-def get_users_info(user_ids: str) -> list[dict]:
+def get_users_info(user_id: str, users_data: dict[dict]) -> dict:
     params = {
         'access_token': ACCESS_TOKEN,
-        'user_ids': ','.join(user_ids),
+        'user_ids': user_id,
         'fields': 'bdate, city, country, sex',
         'v': '5.154'
-    }
-    response = get("https://api.vk.com/method/users.get", params=params).json()["response"]
-    bdate_pattern = r"(\d+)\.(\d)+\.(\d+)"
-    filtred_users_data = []
-    for user in response:
-        user_data = {
-            "firs_name": user["first_name"],
-            "last_name": user["last_name"]
         }
-        try:
-            user_data["country"] = user["country"]["title"]
-        except KeyError:
-            user_data["country"] = "Other"
-        
-        try:
-            user_data["sex"] = "Female" if user["sex"] == 1 else "Male"
-        except KeyError:
-            user_data["sex"] = "Other"
-        
-        try:
-            bdate = user["bdate"]
-            if re.match(bdate_pattern, bdate):
-                user_data["age"] = str((datetime.now() - datetime.strptime(bdate, "%d.%m.%Y")).days // 365)
-            else:
-                user_data["age"] = "Other"
-        except KeyError:
-            user_data["age"] = "Other"
 
-        try:
-            user_data["city"] = user["city"]["title"]
-        except KeyError:
-            user_data["city"] = "Other"
+    user = get("https://api.vk.com/method/users.get", params=params).json()["response"][0]
+    bdate_pattern = r"(\d+)\.(\d)+\.(\d+)"
 
+    try:
+        country = user["country"]["title"]
+    except KeyError:
+        country = "Other"
+    
+    try:
+        sex = "Female" if user["sex"] == 1 else "Male"
+    except KeyError:
+        sex = "Other"
+    
+    try:
+        bdate = user["bdate"]
+        if re.match(bdate_pattern, bdate):
+            age = str((datetime.now() - datetime.strptime(bdate, "%d.%m.%Y")).days // 365)
+        else:
+            age = "Other"
+    except KeyError:
+        age = "Other"
 
-        filtred_users_data.append(user_data)
+    try:
+        city = user["city"]["title"]
+    except KeyError:
+        city = "Other"
 
-    return filtred_users_data
+    users_data["cities"][city] = users_data["cities"].get(city, 0) + 1
+    users_data["countries"][country] = users_data["countries"].get(country, 0) + 1
+    users_data["sex"][sex] = users_data["sex"].get(sex, 0) + 1
+    users_data["ages"][age] = users_data["ages"].get(age, 0) + 1
 
-
-with open('f.json', 'w', encoding="utf-8") as file:
-    user_ids = get_user_ids_from_post(-55206187, 2628)
-    data = [", ".join(user_ids[i:i+20]) for i in range(0, len(user_ids), 20)]
-
-    result = [get_users_info(i) for i in data]
-
-    print(len(data),"=",len(result))
-    json.dump({"count": len(result), "items": result}, file, ensure_ascii=False)
+    return users_data
