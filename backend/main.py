@@ -29,7 +29,7 @@ def analyze_likes(
     country_checkbox: Annotated[bool, Query(alias="country")]=False, 
     ):
     
-    print(sex_checkbox, city_checkbox, age_checkbox,)
+    print(sex_checkbox, city_checkbox, age_checkbox, country_checkbox)
     url_pattern = r"https://vk\.com/(\w+)\?w=wall-(\d+)_(\d+)"
     if re.match(pattern=url_pattern, string=post_url):
         post_url = post_url[post_url.index("wall"):]
@@ -48,16 +48,23 @@ def analyze_likes(
         for iterator, user_id in enumerate(user_ids, start=1):
             print(f"{iterator}/{len(user_ids)}")
             users_data = get_users_info(user_id, users_data)
+
+        categories = []
+
         if sex_checkbox:
             create_plot("sex", users_data["sex"].values(), users_data["sex"].keys())
+            categories.append("sex.png")
         if city_checkbox:
             create_plot("cities", users_data["cities"].values(), users_data["cities"].keys())
+            categories.append("cities.png")
         if country_checkbox:
             create_plot("countries", users_data["countries"].values(), users_data["countries"].keys())
+            categories.append("countries.png")
         if age_checkbox:
             create_plot("ages", users_data["ages"].values(), users_data["ages"].keys())
+            categories.append("ages.png")
 
-        return templates.TemplateResponse("main.html", {"request": request, "post_url": post_url})
+        return templates.TemplateResponse("main.html", {"request": request, "post_url": post_url, "categories": categories})
 
     else:
         return {
