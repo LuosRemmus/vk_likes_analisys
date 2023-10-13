@@ -1,13 +1,45 @@
 {% extends "base.html" %}
 
 {% block head %}
+<style>
+    body {
+        background-image: url("https://www.nastol.com.ua/download.php?img=202110/1920x1080/nastol.com.ua-474919.jpg");
+        background-size: cover;
+    }
 
+    .img-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .img-container div {
+        flex: 1 0 100%;
+        max-width: 100%;
+        position: relative;
+    }
+
+    .img-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .img_value {
+        width: 500px;
+        float: left;
+        margin: auto;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-<div style="display: flex; justify-content: center; align-items: center;">
+<div class="img-container"> 
     {% for category in categories %}
-    <img src="{{ url_for('media', path=category) }}" style="float: left; width: 25%;">
+    <div class="img_value">
+        <img src="{{ url_for('media', path=category) }}" style="float: left; width: 25%;">
+    </div>
     {% endfor %}
 </div>
 {% endblock %}

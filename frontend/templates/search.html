@@ -1,7 +1,92 @@
 {% extends "base.html" %}
 
 {% block head %}
+<style>
+    body {
+        background-image: url('https://www.nastol.com.ua/download.php?img=202110/1920x1080/nastol.com.ua-474919.jpg');
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Courier New', monospace;
+    }
+    
 
+    form {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    div {
+        margin: 10px 0px;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    .option-container {
+        border: 1px solid black;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .option-container div {
+        width: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    button {
+    /* Размер и отступы */
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    
+    /* Внешний вид */
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    
+    /* Наведение и состояние "фокус" */
+    cursor: pointer;
+    }
+    
+    button:hover {
+    background-color: #0056b3;
+    }
+
+    button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #0056b3;
+    }
+
+    /* Стиль нажатого состояния кнопки */
+    button:active {
+    background-color: #003977;
+    }
+
+    /* Стиль отключенной кнопки */
+    button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    }
+
+    /* Стиль, применяемый на кнопке при добавлении класса "active" */
+    button.active {
+    background-color: #003977;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -11,20 +96,20 @@
             <input type="text", name="post_url", placeholder="Введите ссылку:" required>
         </div>
 
-        <div style="border: 1px solid black; width: 250px;">
-            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+        <div сдфыы="option-container">
+            <div>
                 <p>Пол</p>
                 <input type="checkbox", name="sex">
             </div>
-            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+            <div>
                 <p>Город</p>
                 <input type="checkbox", name="city">
             </div>
-            <div style="float: left; margin-right: 20px; margin-bottom: 10px;">
+            <div>
                 <p>Возраст</p>
                 <input type="checkbox", name="age">
             </div>
-            <div style="margin-right: 20px; margin-bottom: 10px;">
+            <div>
                 <p>Страна</p>
                 <input type="checkbox", name="country">
             </div>
